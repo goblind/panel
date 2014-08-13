@@ -1,0 +1,24 @@
+extend ../../views/layout
+
+block content
+	.container-fluid
+		br
+		.row
+			h2
+				i.fa.fa-sign-in  
+				|  Ingreso al Sistema
+			br
+			br
+			form.form-horizontal(role='form', action='/signIn', method='post')
+				.form-group
+					label.col-xs-2.control-label(for='inputUsuarioRed') Usuario de Red
+					.col-xs-3
+						input#inputUsuarioRed.form-control(type='text', placeholder='Usuario de Red', name='usuarioRed')
+				.form-group
+					label.col-xs-2.control-label(for='inputPassword') Password
+					.col-xs-3
+						input#inputPassword.form-control(type='password', placeholder='Password', name='password')
+				.form-group
+					.col-sm-offset-2.col-sm-10
+						button.btn.btn-default(type='submit') Ingresar
+

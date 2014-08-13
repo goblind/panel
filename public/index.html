@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>node xprs msql dttable btstrap</title>
+	<link rel="stylesheet" href="app/stylesheets/bootstrap.css"></link>
+	<link rel="stylesheet" href="app/stylesheets/dataTables.bootstrap.css"></link>	
+	
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>	
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>	
+	<script src="app/javascripts/dataTables.bootstrap.js"></script>		
+	<script>
+		$(document).ready(function(){
+			$("#user-submit").on("click", function(){
+				var user = {
+					name: $("#user-name").val(),
+					movie: $("#user-movie").val()
+				};				
+				$.ajax({
+					url: "/users",
+					type: "POST",
+					contentType: "application/json",
+					processData: false,
+					data: JSON.stringify(user),
+					complete: function(data){
+						$("#output").html(data.responseText);						
+					}
+				});
+			});
+
+			function isDataTableInit(dataTableId){
+				var dataTable = document.getElementById(dataTableId);
+				if ($.fn.DataTable.fnIsDataTable(dataTable)){
+					$(dataTable).dataTable().fnClearTable();					
+  					$(dataTable).dataTable().fnDestroy();
+				} 	  				
+			}
+
+			$("#buttonGetPendientesPcrc").on("click", function(){						
+				isDataTableInit('pendiente_pcrc');					
+				$.ajax({
+					url: "/getPendientePcrc",					
+					contentType: "application/json",
+					processData: false,					
+					complete: function(data){													
+						$("#pendiente_pcrc").dataTable({														
+							"aaData": data.responseJSON,							
+							"aoColumns": [								
+								{ "sTitle": "PCRC", "mDataProp": "pcrc"},
+								{ "sTitle": "Unidad", "mDataProp": "unidad"},
+								{ "sTitle": "Pendiente", "mDataProp": "pendiente"},								
+								{ "sTitle": "Antigüedad", "mDataProp": "antiguedad"}
+							],
+							"oLanguage": {
+								"sLengthMenu": "Mostrar _MENU_ registros",
+								"sSearch": "Buscar:",
+								"sZeroRecords": "No se encontraron resultados",
+								"sInfo": "Mostrando _END_ registros",
+								"sInfoEmpty": "Mostrando 0 de 0 registros",								
+								"sInfoFiltered": "(total: _MAX_ registros)",
+								"oPaginate": {
+									"sPrevious": "Anterior",
+					        				"sNext": "Siguiente"
+					        			}
+							},
+							"aaSorting": [[ 0, "desc" ]],
+							"bSort": false,
+							"bInfo" : false,
+							"bRetrieve": true,
+							"bDestroy": true,
+							"bPaginate": false,
+							"bFilter": false
+						});						
+					}
+				});
+			});
+			
+			$("#buttonGetOperadoresOnline").on("click", function(){						
+				isDataTableInit('operadores_online');					
+				$.ajax({
+					url: "/getOperadoresOnline",					
+					contentType: "application/json",
+					processData: false,					
+					complete: function(data){													
+						$("#operadores_online").dataTable({														
+							"aaData": data.responseJSON,							
+							"aoColumns": [								
+								{ "sTitle": "Operador", "mDataProp": "operador"},
+								{ "sTitle": "PCRC", "mDataProp": "pcrc"},
+								{ "sTitle": "Línea", "mDataProp": "linea"},								
+								{ "sTitle": "Hora", "mDataProp": "hora"}
+							],
+							"oLanguage": {
+								"sLengthMenu": "Mostrar _MENU_ registros",
+								"sSearch": "Buscar:",
+								"sZeroRecords": "No se encontraron resultados",
+								"sInfo": "Mostrando _END_ registros",
+								"sInfoEmpty": "Mostrando 0 de 0 registros",								
+								"sInfoFiltered": "(total: _MAX_ registros)",
+								"oPaginate": {
+									"sPrevious": "Anterior",
+					        		"sNext": "Siguiente"
+					        		}
+						},
+							"bRetrieve": true,
+							"bDestroy": true
+						});						
+					}
+				});
+			});
+
+		});
+	</script>
+</head>
+<body>
+	<!-- <h3>Ingreso al sistema:</h3>
+	<input type="text" id="user-name" placeholder="Usuario" />
+	<br>	
+	<input type="text" id="user-movie" placeholder="Password"/>
+	<br>
+	<br>
+	<input type="submit" id="user-submit" value="Ingresar" />
+	<p id="output"></p>
+	<hr> -->
+	<br>
+	<div class="row">		
+		<div class="col-xs-6">
+			<input type="submit" id="buttonGetPendientesPcrc" value="Pendientes"/>
+			<br>	
+			<br>
+			<table id="pendiente_pcrc" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-condensed table-hover">
+			</table>		
+		</div>				
+		<div class="col-xs-6">
+		</div>
+	</div>	
+	<hr>
+	<div class="row">		
+		<div class="col-xs-6">
+			<input type="submit" id="buttonGetOperadoresOnline" value="Operadores Online"/>
+			<br>	
+			<br>
+			<table id="operadores_online" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-condensed table-hover">
+			</table>		
+		</div>	
+		<div class="col-xs-6">					
+		</div>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-xs-6">
+			<input type="submit" id="a" value="Trabajo Diario"/>
+			<br>	
+			<br>
+			<table id="work_today" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-condensed table-hover">
+			</table>		
+		</div>	
+		<div class="col-xs-6">					
+		</div>
+		<br>
+	</div>
+
+	<div class="row"></div>
+		<div class="col-xs-6">					
+		
+		<table class="table table-condensed table-bordered table-striped table-hover" width="647">
+<thead>
+<tr>
+<th>#</th>
+<th>Name</th>
+<th>Address</th>
+<th>mail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Thomas bell</td>
+<td>Brick lane, London</td>
+<td>thomas@yahoo.com</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Yan Chapel</td>
+<td>Toronto Australia</td>
+<td>Yan@yahoo.com</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Pit Sampras</td>
+<td>Berlin, Germany</td>
+<td>Pit @yahoo.com</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Pit Sampras</td>
+<td>Berlin, Germany</td>
+<td>Pit @yahoo.com</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Pit Sampras</td>
+<td>Berlin, Germany</td>
+<td>Pit @yahoo.com</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Pit Sampras</td>
+<td>Berlin, Germany</td>
+<td>Pit @yahoo.com</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Pit Sampras</td>
+<td>Berlin, Germany</td>
+<td>Pit @yahoo.com</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Pit Sampras</td>
+<td>Berlin, Germany</td>
+<td>Pit @yahoo.com</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Pit Sampras</td>
+<td>Berlin, Germany</td>
+<td>Pit @yahoo.com</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Pit Sampras</td>
+<td>Berlin, Germany</td>
+<td>Pit @yahoo.com</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Pit Sampras</td>
+<td>Berlin, Germany</td>
+<td>Pit @yahoo.com</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="col-xs-6">	
+<table class="table table-condensed table-bordered table-striped table-hover" width="647">
+<thead>
+<tr>
+<th>#</th>
+<th>Name</th>
+<th>Address</th>
+<th>mail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Thomas bell</td>
+<td>Brick lane, London</td>
+<td>thomas@yahoo.com</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Yan Chapel</td>
+<td>Toronto Australia</td>
+<td>Yan@yahoo.com</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Pit Sampras</td>
+<td>Berlin, Germany</td>
+<td>Pit @yahoo.com</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Pit Sampras</td>
+<td>Berlin, Germany</td>
+<td>Pit @yahoo.com</td>
+</tr>
+</tbody>
+</table>
+	</div>
+	</div>
+</body>
+</html>
