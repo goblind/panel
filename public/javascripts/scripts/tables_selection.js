@@ -86,7 +86,7 @@ $(function() {
 			var bcText = $(this).children().first().text();
 			setBreadcumb('liBcOperador', bcText);					
 			$(this).siblings().hide();
-			//createNextTable('offline_equipo', this);
+			createNextTable('offline_operadores', this);
 		}
 		else{
 			$(this).siblings().show();
@@ -119,7 +119,7 @@ function createNextTable(tableId , _this){
 		else if (f == 'offlineOperadores')
 			offlineOperadores(startDate, endDate, aData[0], aData[1]);
 		else if (f == 'offlineDetalle')
-			offlineDetalle(startDate, endDate, aData);
+			offlineDetalle(startDate, endDate, aData[0], aData[1]);
 	}
 }
 

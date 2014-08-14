@@ -181,3 +181,44 @@ function offlineOperadores(startDate, endDate, supervisorId, pcrcId){
 	   	}
 	});
 }
+
+function offlineDetalle(startDate, endDate, operadorId, pcrcId){	
+	isDataTableInit('offline_detalle');
+	var oTable = $("#offline_detalle").dataTable({                                           	    	
+	    	'fnServerParams': function (aoData) {
+	       		aoData.push({ "name": "startDate", "value": startDate });
+	       		aoData.push({ "name": "endDate", "value": endDate });
+	       		aoData.push({ "name": "operadorId", "value": operadorId });
+	       		aoData.push({ "name": "pcrcId", "value": pcrcId });	       		
+	     	},
+	     	'sAjaxSource':  '/getSupervisionOfflineDetalle',	     	
+	     	'sAjaxDataProp': '',
+	    	'bProcessing': true,          	    	    	    	
+	    	"aoColumns": [                              
+	    		{ "bVisible": false, "mDataProp": "persona_id"},			 		
+	        		{ "sWidth": "10%","sTitle": "Fecha", "mDataProp": "fecha"},
+			{ "sWidth": "10%","sTitle": "Línea", "mDataProp": "linea"},
+			{ "sWidth": "10%","sTitle": "Actividad", "mDataProp": "actividad"},
+			{ "sWidth": "10%","sTitle": "Tiempo", "mDataProp": "tiempo"},
+			{ "sWidth": "10%","sTitle": "Estado", "mDataProp": "estado"},			
+			{ "sWidth": "20%","sTitle": "Clasificación", "mDataProp": "clasificacion"},
+			{ "sWidth": "20%","sTitle": "Observaciones", "mDataProp": "observaciones"}			
+	    	],              
+	    	"oLanguage": {
+	        		"sUrl": "/javascripts/i18n/dataTables.Spanish.json"
+	    	},                 
+	    	"aaSorting": [[ 1, "asc" ]],
+		"bAutoWidth": false,
+		"bLengthChange": false	
+	});
+}
+
+$('#mytable th').each(function(i) {
+    var remove = 0;
+    var tds = $(this).parents('table').find('tr td:nth-child(' + (i + 1) + ')')
+    tds.each(function(j) { if (this.innerHTML == '') remove++; });
+    if (remove == ($('#mytable tr').length - 1)) {
+        $(this).hide();
+        tds.hide();
+    }
+});

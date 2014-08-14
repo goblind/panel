@@ -42,3 +42,9 @@ exports.getSupervisionOfflineOperadores = function(data, callback){
 	var query = "CALL supervisionGetOfflineOperadores('"+data.persona+"', '"+data.supervisorId+"', '"+data.pcrcId+"', '"+data.startDate+"','"+data.endDate+"');";	
 	utils.exec(query, null, callback);
 };
+
+exports.getSupervisionOfflineDetalle = function(data, callback){
+	var query = "CALL supervisionGetOfflineDetalle('"+data.persona+"', '"+data.operadorId+"', '"+data.pcrcId+"', '"+data.startDate+"','"+data.endDate+"');";	
+	console.log(query);
+	utils.exec(query, null, callback);
+};

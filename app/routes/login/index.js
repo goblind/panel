@@ -40,6 +40,8 @@ app.post('/signIn', function(req, res){
 	})*/	
 	req.session.lastPage = '/login';
 	req.session.persona = req.body.persona;
+	console.log(req);
+	console.log(req.body);
 	var a = req.session.persona;	
 	//req.user = req.body.persona;	
 	res.redirect('/supervision');

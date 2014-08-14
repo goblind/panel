@@ -99,3 +99,18 @@ app.get('/getSupervisionOfflineOperadores', function(req, res){
 		res.send(results[0]);
 	});
 });
+
+app.get('/getSupervisionOfflineDetalle', function(req, res){
+	var data = {
+		persona: req.session.persona,
+		operadorId: req.query.operadorId,
+		pcrcId: req.query.pcrcId,
+		startDate: req.query.startDate,
+		endDate: req.query.endDate
+	};	
+	console.log(data);	
+	mysqldb.getSupervisionOfflineDetalle(data, function (err, results, fields){
+		if(err) throw err;
+		res.send(results[0]);
+	});
+});
