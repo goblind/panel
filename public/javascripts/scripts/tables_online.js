@@ -63,15 +63,33 @@ function getOnline(){
 					{ "sWidth": "8%", "sTitle": "Unidad", "mDataProp": "unidad"},
 					{"sWidth": "8%",  "sTitle": "Operador", "mDataProp": "persona", 'bSortable': false},								
 					{"sWidth": "8%",  "sTitle": "Hora", "mDataProp": "tomado"},					
-					{"sWidth": "8%", "sTitle": "Duración", "mDataProp": "duracion", 'bSortable': false},
+					{"sWidth": "8%", "sTitle": "Duración", "mDataProp": "duracion",
+			            			"mRender": function (data, type, full) {                                               
+			                        			if (type === 'display')
+			                        				return data + ' min.';
+			                        			return data;
+			                    		} 
+			                    	},
 					{ "sWidth": "32%", "sTitle": "Clasificación", "mDataProp": "clasificacion", 'bSortable': false},
-					{ "sWidth": "28%", "sTitle": "Observación", "mDataProp": "observacion", 'bSortable': false}							
+					{ "sWidth": "28%", "sTitle": "Observación", "mDataProp": "observacion", 'bSortable': false, 
+						"mRender": function ( data, type, full ) {
+						            	if (data != null) {
+						               	return '<div class="toEllip">'+data+'</div>';
+						               	//return data;  	
+						               }
+						            	else 
+						            		return ''; 
+        						}
+        					}							
 				],				
 				"oLanguage": {
 					"sUrl": "/javascripts/i18n/dataTables.Spanish.json"
 				},	
 				"bAutoWidth": false,
-				"bLengthChange": false
+				"bLengthChange": false,
+				"fnInitComplete": function(oSettings, json){									
+					noLineBreak();
+				}
 			});
 		}
 	});
@@ -84,3 +102,4 @@ function isDataTableInit(dataTableId){
 		$(dataTable).dataTable().fnDestroy();
 	}
 }
+

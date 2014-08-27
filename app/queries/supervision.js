@@ -44,7 +44,11 @@ exports.getSupervisionOfflineOperadores = function(data, callback){
 };
 
 exports.getSupervisionOfflineDetalle = function(data, callback){
-	var query = "CALL supervisionGetOfflineDetalle('"+data.persona+"', '"+data.operadorId+"', '"+data.pcrcId+"', '"+data.startDate+"','"+data.endDate+"');";	
-	console.log(query);
+	var query = "CALL supervisionGetOfflineDetalle('"+data.persona+"', '"+data.operadorId+"', '"+data.pcrcId+"', '"+data.startDate+"','"+data.endDate+"');";			
+	utils.exec(query, null, callback);
+};
+
+exports.getSupervisionOfflineDetalle2 = function(data, callback){
+	var query = "CALL testa('"+data.persona+"', '"+data.operadorId+"', '"+data.pcrcId+"', '"+data.startDate+"','"+data.endDate+"');";			
 	utils.exec(query, null, callback);
 };

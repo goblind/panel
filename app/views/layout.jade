@@ -6,33 +6,27 @@ html
 	head
 		title Back Office
 		link(rel='stylesheet', href='/stylesheets/datepicker3.css')
-		link(rel='stylesheet', href='/stylesheets/bootstrap-custom.css')
+		link(rel='stylesheet', href='/stylesheets/bootstrap-custom2.css')
+		//-link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')		
 		link(rel='stylesheet', href='/stylesheets/dataTables.bootstrap.css')
 		//-link(rel='stylesheet', href='/stylesheets/font-awesome.css')
 		link(rel='stylesheet', href='http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css')
 		link(rel='stylesheet', href='/stylesheets/style.css')
-		| <style>
-		| body { padding-top: 67px; }
-		| </style>
+		link(rel='stylesheet', href='/stylesheets/dashboard.css')
+
 		script(src='/javascripts/jquery.min.js')
 	body
 		include header
 
 		div.container-fluid
-			div.row-fluid
-				div.col-md-1
-					ul.list-unstyled
-						li.nav-header 
-							br
-							a(href="/supervision/") Online
-							//ul.list-unstlyed
-							//	li.active
-							//		a(href="#") Vista 1
-							//	li
-							//		a(href="#") Vista 2
-						li.nav-header
-							a(href="/supervision/offline") Offline
-				div.col-md-11
+			div.row
+				div.col-sm-3.col-md-2.sidebar
+					ul.nav.nav-sidebar
+						li
+							a(href="/supervision/") Detalle Online
+						li
+							a(href="/supervision/offline") Métricas
+				div.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
 					block content
 
 		include footer

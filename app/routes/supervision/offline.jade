@@ -6,56 +6,45 @@ block content
 			setDatepickers();
 			initialSettings();
 		});
-	div.container-fluid
-		.row
-			.col-md-6
-				ol#olBcPcrc.breadcrumb.text-right
-					//- li#liBcPcrc 
-					//- 	//- a(href='#') pcrc
-					//- li#liBcCentro 
-					//- 	//- a(href='#') centro
-					//- li#liBcEquipo 
-					//- 	//- a(href='#') equipo
-					//- li#liBcOperador 
-			.col-md-6
-				ol#olBcPcrc.breadcrumb(style="height:36px;")				
-		.row
-			.col-md-6
-				.row
-					.col-md-8
-						.form-group
-							#offline_datepicker.input-daterange.input-group
-								input#offlineStartDate.input-sm.form-control(type='text', name='start', placeholder='Desde')
-								span.input-group-addon a
-								input#offlineEndDate.input-sm.form-control(type='text', name='end', placeholder='Hasta')
-								span.input-group-btn
-									button#refreshDates.btn.btn-default.btn-sm(type='button')
-										i.fa.fa-refresh.fa-lg
-					.col-md-4
-			.col-md-6		
-		#pcrc.row
-			.col-md-6
-				table#offline_pcrc.table.table-striped.table-bordered.table-condensed.table-hover
-			.col-md-6			
-		#centro.row
-			br
-			div.col-md-6
-				table#offline_centro.table.table-striped.table-bordered.table-condensed.table-hover
-			div.col-md-6
-		#equipo.row
-			br
-			div.col-md-6
-				table#offline_equipo.table.table-striped.table-bordered.table-condensed.table-hover
-			div.col-md-6
-		#operadores.row
-			br
-			div.col-md-6
-				table#offline_operadores.table.table-striped.table-bordered.table-condensed.table-hover
-			div.col-md-6
-		#detalle.row
-			br
-			div.col-md-12
-				table#offline_detalle.table.table-striped.table-bordered.table-condensed.table-hover
+	h1.page-header Métricas por PCRC				
+	.row
+		.col-md-6
+			.row
+				.col-md-8
+					.form-group
+						#offline_datepicker.input-daterange.input-group
+							input#offlineStartDate.input-sm.form-control(type='text', name='start', placeholder='Desde')
+							span.input-group-addon a
+							input#offlineEndDate.input-sm.form-control(type='text', name='end', placeholder='Hasta')
+							span.input-group-btn
+								button#refreshDates.btn.btn-default.btn-sm(type='button')
+									i.fa.fa-refresh.fa-lg
+				.col-md-4
+		.col-md-6		
+	#pcrc.row
+		.col-md-6
+			table#offline_pcrc.table.table-striped.table-bordered.table-condensed.table-hover
+		.col-md-6			
+	#centro.row
+		br
+		div.col-md-6
+			table#offline_centro.table.table-striped.table-bordered.table-condensed.table-hover
+		div.col-md-6
+	#equipo.row
+		br
+		div.col-md-6
+			table#offline_equipo.table.table-striped.table-bordered.table-condensed.table-hover
+		div.col-md-6
+	#operadores.row
+		br
+		div.col-md-6
+			table#offline_operadores.table.table-striped.table-bordered.table-condensed.table-hover
+		div.col-md-6
+	#detalle.row
+		br
+		div.col-md-12
+			table#offline_detalle.table.table-striped.table-bordered.table-condensed.table-hover
+				
 	script(src='/javascripts/scripts/tables_offline.js')
 	script(src='/javascripts/scripts/tables_selection.js')
 	script(src='/javascripts/scripts/datepickers.js')

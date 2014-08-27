@@ -39,30 +39,21 @@ $(function() {
 	$('#offline_pcrc').on('click', 'tbody tr', function(){		
 		if($(this).hasClass('info')){
 			var bcText = $(this).children().first().text();
-			setBreadcumb('liBcPcrc', bcText);
 			createNextTable('offline_pcrc', this);
 		}	
 		else{
 			hideElements('centro');
-			setBreadcumb('liBcPcrc', '');
-			setBreadcumb('liBcCentro', '');
-			setBreadcumb('liBcEquipo','');
-			setBreadcumb('liBcOperador', '');
 			destroyTables('offline_pcrc');
 		}	
 	});	
 
 	$('#offline_centro').on('click', 'tbody tr', function(){
 		if($(this).hasClass('info')){	
-			var bcText = $(this).children().first().text();
-			setBreadcumb('liBcCentro', bcText);		
+			var bcText = $(this).children().first().text();			
 			createNextTable('offline_centro', this);									
 		}
 		else{
 			hideElements('equipo');
-			setBreadcumb('liBcCentro', '');
-			setBreadcumb('liBcEquipo','');
-			setBreadcumb('liBcOperador', '');	
 			destroyTables('offline_centro');
 		}
 	});
@@ -70,30 +61,28 @@ $(function() {
 	$('#offline_equipo').on('click', 'tbody tr', function(){
 		if($(this).hasClass('info')){
 			var bcText = $(this).children().first().text();
-			setBreadcumb('liBcEquipo', bcText);
 			createNextTable('offline_equipo', this);									
 		}
 		else{
 			hideElements('operadores');
-			setBreadcumb('liBcEquipo','');
-			setBreadcumb('liBcOperador', '');
 			destroyTables('offline_equipo');
 		}
 	});
 
 	$('#offline_operadores').on('click', 'tbody tr', function(){
 		if($(this).hasClass('info')){	
-			var bcText = $(this).children().first().text();
-			setBreadcumb('liBcOperador', bcText);					
+			var bcText = $(this).children().first().text();				
 			$(this).siblings().hide();
 			createNextTable('offline_operadores', this);
 		}
 		else{
 			$(this).siblings().show();
-			setBreadcumb('liBcOperador', '');
 			hideElements('detalle');
 			destroyTables('offline_operadores');
 		}
+	});
+
+	$('#offline_detalle').on('click', 'tbody tr', function(){		
 	});
 });
 
@@ -211,3 +200,8 @@ function isDataTableInit(tableId){
 		$(dataTable).dataTable().fnDestroy();
 	} 	  				
 }
+
+function noLineBreak(){		
+	$('.toEllip').dotdotdot();
+}
+

@@ -27,7 +27,7 @@ function offlinePcrc(startDate, endDate) {
 			{ "sWidth": "22%","sTitle": "Reitero", "mDataProp": "reitero",
 	            			"mRender": function (data, type, full) {                                               
 	                        			if (data == null) 
-	                        				return '-';
+	                        				return '';
 	                        			else 
 	                        				return data + '%';
 	                    		} 
@@ -71,7 +71,7 @@ function offlineCentro(startDate, endDate, pcrcId){
 			{ "sWidth": "22%","sTitle": "Reitero", "mDataProp": "reitero",
 	            			"mRender": function (data, type, full) {                                               
 	                        			if (data == null) 
-	                        				return '-';
+	                        				return '';
 	                        			else 
 	                        				return data + '%';
 	                    		} 
@@ -115,7 +115,7 @@ function offlineEquipo(startDate, endDate, pcrcId){
 			{ "sWidth": "22%","sTitle": "Reitero", "mDataProp": "reitero",
 	            			"mRender": function (data, type, full) {                                               
 	                        			if (data == null) 
-	                        				return '-';
+	                        				return '';
 	                        			else 
 	                        				return data + '%';
 	                    		} 
@@ -160,7 +160,7 @@ function offlineOperadores(startDate, endDate, supervisorId, pcrcId){
 			{ "sWidth": "22%","sTitle": "Reitero", "mDataProp": "reitero",
 	            			"mRender": function (data, type, full) {                                               
 	                        			if (data == null) 
-	                        				return '-';
+	                        				return '';
 	                        			else 
 	                        				return data + '%';
 	                    		} 
@@ -199,7 +199,14 @@ function offlineDetalle(startDate, endDate, operadorId, pcrcId){
 	        		{ "sWidth": "10%","sTitle": "Fecha", "mDataProp": "fecha"},
 			{ "sWidth": "10%","sTitle": "Línea", "mDataProp": "linea"},
 			{ "sWidth": "10%","sTitle": "Actividad", "mDataProp": "actividad"},
-			{ "sWidth": "10%","sTitle": "Tiempo", "mDataProp": "tiempo"},
+			{ "sWidth": "10%","sTitle": "Tiempo", "mDataProp": "tiempo",
+				"mRender": function (data, type, full) {                                               
+	                      			if (type === 'display' && data != '')
+	                        				return data + ' min.';
+	                        			else
+	                        				return '';
+	                    		} 
+	                    	},
 			{ "sWidth": "10%","sTitle": "Estado", "mDataProp": "estado"},			
 			{ "sWidth": "20%","sTitle": "Clasificación", "mDataProp": "clasificacion"},
 			{ "sWidth": "20%","sTitle": "Observaciones", "mDataProp": "observaciones"}			
@@ -209,7 +216,11 @@ function offlineDetalle(startDate, endDate, operadorId, pcrcId){
 	    	},                 
 	    	"aaSorting": [[ 1, "asc" ]],
 		"bAutoWidth": false,
-		"bLengthChange": false	
+		"bLengthChange": false,
+		"fnInitComplete": function(oSettings, json){	
+			//debugger;		
+			noLineBreak();
+		}
 	});
 }
 

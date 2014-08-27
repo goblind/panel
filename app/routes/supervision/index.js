@@ -15,6 +15,10 @@ app.get('/supervision/offline', function(req, res){
 	res.render('offline');
 });
 
+app.get('/supervision/casuistica', function(req, res){	
+	res.render('casuistica');
+});
+
 //queries
 app.get('/getPendientePcrc', function(req, res){	
 	mysqldb.getPendientePcrc(function (err, results, fields){
@@ -110,6 +114,21 @@ app.get('/getSupervisionOfflineDetalle', function(req, res){
 	};	
 	console.log(data);	
 	mysqldb.getSupervisionOfflineDetalle(data, function (err, results, fields){
+		if(err) throw err;
+		res.send(results[0]);
+	});
+});
+
+app.get('/test', function(req, res){
+	var data = {
+		persona: 'centurionc',
+		operadorId: 84,
+		pcrcId: 2,
+		startDate: '2014-08-15',
+		endDate: '2014-08-21'
+	};	
+	console.log(data);	
+	mysqldb.getSupervisionOfflineDetalle2(data, function (err, results, fields){
 		if(err) throw err;
 		res.send(results[0]);
 	});
