@@ -40,10 +40,7 @@ app.post('/signIn', function(req, res){
 	})*/	
 	req.session.lastPage = '/login';
 	req.session.persona = req.body.persona;
-<<<<<<< HEAD
 	var a = req.session.persona;	
-=======
->>>>>>> f46711e9fc05642497976d1a605c41f2ce3170ea
 	//req.user = req.body.persona;	
 	res.redirect('/supervision');
 });
